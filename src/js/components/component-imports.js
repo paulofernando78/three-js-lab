@@ -1,4 +1,4 @@
-import Section from "./section";
+import Section from "./Section";
 import Cube from "./Cube";
 
 customElements.define("wc-section", Section)
