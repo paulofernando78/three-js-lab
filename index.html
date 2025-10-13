@@ -1,9 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="/src/global.css" />
     <script type="module" src="/src/main.js" defer></script>
     <title>Three JS Lab</title>
   </head>
@@ -11,7 +11,25 @@
     <header>
       <h1 class="header-title">Three JS Lab</h1>
     </header>
+    <!-- Navigation -->
+    <nav>
+      <ul>
+        <li>
+          <a href="#text">Text</a>
+        </li>
+        <li>
+          <a href="#cube">Cube</a>
+        </li>
+        <li>
+          <a href="#sphere">Sphere</a>
+        </li>
+      </ul>
+    </nav>
+    <!-- Content -->
     <div>
+      <wc-section id="text" title="Text"></wc-section>
+      <wc-text> </wc-text>
+      <wc-section id="cube" title="Cube"></wc-section>
       <wc-cube></wc-cube>
     </div>
   </body>
