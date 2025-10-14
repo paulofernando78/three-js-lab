@@ -1,4 +1,19 @@
-/* .container {
-  width: 500px;
+:host {
+  display: block;
+  width: 100%;
   height: 500px;
-} */
+  box-sizing: border-box;
+}
+
+.container {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

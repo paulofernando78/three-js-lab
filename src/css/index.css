@@ -1,0 +1,24 @@
+header {
+  border: 1px solid red;
+}
+
+.nav-app-wrapper {
+  display: grid;
+  grid-template-columns: 103px 1fr;
+  gap: 5px;
+}
+
+.header-title {
+  font-size: 2rem;
+  font-family: "Nabla", system-ui;
+}
+
+#app {
+  width: 100%;
+}
+
+@media (max-width: 500px) {
+  .nav-app-wrapper {
+    grid-template-columns: 1fr;
+  }
+}

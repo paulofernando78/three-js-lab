@@ -3,34 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/src/global.css" />
-    <script type="module" src="/src/main.js" defer></script>
+    <link rel="stylesheet" href="/src/css/index.css" />
+    <link rel="stylesheet" href="/src/css/imports.css" />
+    <link rel="stylesheet" href="./src/css/global.css" />
+    <script type="module" src="/src/js/main.js" defer></script>
     <title>Three JS Lab</title>
   </head>
   <body>
-    <header>
+    <header class="card">
       <h1 class="header-title">Three JS Lab</h1>
     </header>
-    <!-- Navigation -->
-    <nav>
-      <ul>
-        <li>
-          <a href="#text">Text</a>
-        </li>
-        <li>
-          <a href="#cube">Cube</a>
-        </li>
-        <li>
-          <a href="#sphere">Sphere</a>
-        </li>
-      </ul>
-    </nav>
-    <!-- Content -->
-    <div>
-      <wc-section id="text" title="Text"></wc-section>
-      <wc-text> </wc-text>
-      <wc-section id="cube" title="Cube"></wc-section>
-      <wc-cube></wc-cube>
+    <div class="nav-app-wrapper">
+      <nav class="line-break card">
+        <ul>
+          <li><a href="/text" data-link>Text</a></li>
+          <li><a href="/cube" data-link>Cube</a></li>
+          <li><a href="/cube-light" data-link>Cube + Light</a></li>
+          <li><a href="/cube-text" data-link>Cube + Text</a></li>
+        </ul>
+      </nav>
+      <div id="app" class="card">#APP</div>
     </div>
   </body>
 </html>

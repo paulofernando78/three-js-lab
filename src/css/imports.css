@@ -1,3 +1,12 @@
-@import "/src/css/reset.css";
-@import "/src/css/typography.css";
-@import "/src/css/colors.css"
+@import "/src/css/components.css";
+
+/* base */
+@import "/src/css/base/reset.css";
+@import "/src/css/base/typography.css";
+
+/* theme */
+@import "/src/css/theme/colors.css";
+
+/* utiities */
+@import "/src/css/utilities/border.css";
+@import "/src/css/utilities/spacing.css";
