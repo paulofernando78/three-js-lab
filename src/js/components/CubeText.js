@@ -1,4 +1,6 @@
 import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/Addons.js";
+
 import cssCube from "/src/css/components/cube.css?inline";
 
 class CubeText extends HTMLElement {
@@ -9,41 +11,35 @@ class CubeText extends HTMLElement {
     const style = document.createElement("style");
     style.textContent = cssCube;
     this.shadowRoot.appendChild(style);
-
-    this.container = document.createElement("div");
-    this.container.className = "container";
-    this.shadowRoot.appendChild(this.container);
   }
 
   connectedCallback() {
     const scene = new THREE.Scene();
+
     const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+    camera.position.set(0, 3, 5);
+    camera.lookAt(0, 0, 0);
 
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     this.renderer.setClearColor(0x222222, 1);
 
-    // Espera um ciclo de renderização antes de medir o tamanho real
-    requestAnimationFrame(() => {
-      const width = this.container.clientWidth || this.offsetWidth;
-      const height = this.container.clientHeight || this.offsetHeight || 500;
+    const parent = this.shadowRoot.host.parentElement;
+    const { width, height } = parent.getBoundingClientRect();
 
+    this.renderer.setSize(width, height);
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+
+    this.shadowRoot.appendChild(this.renderer.domElement);
+
+    this.resizeObserver = new ResizeObserver(() => {
+      const parent = this.shadowRoot.host.parentElement;
+      const { width, height } = parent.getBoundingClientRect();
       this.renderer.setSize(width, height);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
     });
-
-    // Responsiveness
-    const resizeObserver = new ResizeObserver(() => {
-      const width = this.container.clientWidth;
-      const height = this.container.clientHeight;
-      this.renderer.setSize(width, height);
-      camera.aspect = width / height;
-      camera.updateProjectionMatrix();
-    });
-
-    resizeObserver.observe(this.container);
-
-    this.container.appendChild(this.renderer.domElement);
+    this.resizeObserver.observe(this.shadowRoot.host.parentElement)
 
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.VSMShadowMap;
@@ -163,20 +159,8 @@ class CubeText extends HTMLElement {
 
     scene.add(ambient, directional);
 
-    // Light Helper
-    // const lightHelper = new THREE.DirectionalLightHelper(
-    //   directional,
-    //   0.3,
-    //   0xff0000
-    // );
-    // scene.add(lightHelper);
-
-    // const shadowCameraHelper = new THREE.CameraHelper(
-    //   directional.shadow.camera
-    // );
-    // scene.add(shadowCameraHelper);
-
-    camera.position.z = 2.5;
+    // Camera Position
+    camera.position.z = 5;
 
     let isAnimatingCube1 = true;
     let isAnimatingCube2 = true;
@@ -228,11 +212,19 @@ class CubeText extends HTMLElement {
         }
       }
     });
+
+    const controls = new OrbitControls(camera, this.renderer.domElement);
+    controls.enableDamping = true; // suaviza o movimento
+    controls.dampingFactor = 0.5;
+    controls.enablePan = true; // permite mover lateralmente
+    controls.enableZoom = true; // permite zoom (scroll)
+    controls.target.set(0, 0.5, 0); // o ponto que a câmera "orbita"
+    controls.update();
   }
 
   disconnectedCallback() {
     this.renderer.dispose();
-    this.container.innerHTML = "";
+    this.shadowRoot.innerHTML = "";
   }
 }
 
