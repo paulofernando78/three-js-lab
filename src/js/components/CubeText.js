@@ -217,7 +217,12 @@ class CubeText extends HTMLElement {
       raycaster.setFromCamera(mouse, camera);
 
       // Verifica interseções com os cubos
-      const intersects = raycaster.intersectObjects([cube1, cube2, cube3, cube4]);
+      const intersects = raycaster.intersectObjects([
+        cube1,
+        cube2,
+        cube3,
+        cube4,
+      ]);
 
       if (intersects.length > 0) {
         const clickedCube = intersects[0].object;
