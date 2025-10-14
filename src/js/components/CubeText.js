@@ -18,12 +18,11 @@ class CubeText extends HTMLElement {
 
   connectedCallback() {
     const scene = new THREE.Scene();
-
     const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
     camera.position.set(0, 3, 5);
     camera.lookAt(0, 0, 0);
-
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+
     this.renderer.setClearColor(0x222222, 1);
 
     const parent = this.shadowRoot.host.parentElement;
@@ -81,20 +80,20 @@ class CubeText extends HTMLElement {
       "do",
     ];
     const cube3PhraseList = [
-      "apples.",
-      "water.",
-      "English.",
-      "Math.",
-      "homework.",
-      "books.",
+      "apples",
+      "water",
+      "English",
+      "Math",
+      "homework",
+      "books",
     ];
     const cube4PhraseList = [
-      "in the morning",
-      "in the afternoon",
-      "in the evening",
-      "at night",
-      "at ???",
-      "at ???",
+      "in the morning.",
+      "in the afternoon.",
+      "in the evening.",
+      "at night.",
+      "at ???.",
+      "-",
     ];
 
     function makeTextCube(phrases, baseColor = 0xffffff) {
@@ -124,7 +123,7 @@ class CubeText extends HTMLElement {
       cube.position.set(i * spacing, 0.1, 0);
       cube.castShadow = true;
       scene.add(cube);
-      cubes.push(cube);
+      cubes.push(cube); // ✅ salva o cube no array
     });
 
     let [cube1, cube2, cube3, cube4] = cubes;
