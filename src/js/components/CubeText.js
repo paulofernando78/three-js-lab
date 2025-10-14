@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/Addons.js";
 
+import cssimports from "/src/css/imports.css?inline";
 import cssCube from "/src/css/components/cube.css?inline";
 
 class CubeText extends HTMLElement {
@@ -8,9 +9,11 @@ class CubeText extends HTMLElement {
     super();
     this.attachShadow({ mode: "open" });
 
-    const style = document.createElement("style");
-    style.textContent = cssCube;
-    this.shadowRoot.appendChild(style);
+    [cssimports, cssCube].forEach((imports) => {
+      const style = document.createElement("style");
+      style.textContent = imports;
+      this.shadowRoot.appendChild(style);
+    });
   }
 
   connectedCallback() {
@@ -75,14 +78,23 @@ class CubeText extends HTMLElement {
       "study",
       "read",
       "sleep",
+      "do",
     ];
     const cube3PhraseList = [
-      "apples",
-      "water",
-      "English",
+      "apples.",
+      "water.",
+      "English.",
+      "Math.",
+      "homework.",
+      "books.",
+    ];
+    const cube4PhraseList = [
       "in the morning",
+      "in the afternoon",
       "in the evening",
       "at night",
+      "at ???",
+      "at ???",
     ];
 
     function makeTextCube(phrases, baseColor = 0xffffff) {
@@ -97,25 +109,27 @@ class CubeText extends HTMLElement {
       return new THREE.Mesh(geometry, materials);
     }
 
-    const cube1 = makeTextCube(cube1PhraseList, 0xffaaaa);
-    cube1.position.y = 0.1;
-    cube1.position.x = -1.7;
-    cube1.castShadow = true;
-    scene.add(cube1);
+    const cubeData = [
+      { list: cube1PhraseList, color: 0xffaaaa },
+      { list: cube2PhraseList, color: 0xffaaaa },
+      { list: cube3PhraseList, color: 0xffaaaa },
+      { list: cube4PhraseList, color: 0xffaaaa },
+    ];
 
-    const cube2 = makeTextCube(cube2PhraseList, 0xaaffaa);
-    cube2.position.y = 0.1;
-    cube2.position.x = 0;
-    cube2.castShadow = true;
-    scene.add(cube2);
+    const cubes = [];
+    const spacing = 1.7;
 
-    const cube3 = makeTextCube(cube3PhraseList, 0xaaaaff);
-    cube3.position.y = 0.1;
-    cube3.position.x = 1.7;
-    cube3.castShadow = true;
-    scene.add(cube3);
+    cubeData.forEach((data, i) => {
+      const cube = makeTextCube(data.list, data.color);
+      cube.position.set(i * spacing, 0.1, 0);
+      cube.castShadow = true;
+      scene.add(cube);
+      cubes.push(cube);
+    });
 
-    const planeGeometry = new THREE.PlaneGeometry(10, 10);
+    let [cube1, cube2, cube3, cube4] = cubes;
+
+    const planeGeometry = new THREE.PlaneGeometry(100, 100);
     // const planeMaterial = new THREE.ShadowMaterial({opacity: 0.3 });
 
     // Text Loader
@@ -125,7 +139,7 @@ class CubeText extends HTMLElement {
     );
     floorTexture.wrapS = THREE.RepeatWrapping;
     floorTexture.wrapT = THREE.RepeatWrapping;
-    floorTexture.repeat.set(4, 4);
+    floorTexture.repeat.set(15, 15);
 
     const planeMaterial = new THREE.MeshStandardMaterial({
       map: floorTexture,
@@ -165,6 +179,7 @@ class CubeText extends HTMLElement {
     let isAnimatingCube1 = true;
     let isAnimatingCube2 = true;
     let isAnimatingCube3 = true;
+    let isAnimatingCube4 = true;
 
     const animate = () => {
       if (isAnimatingCube1) {
@@ -178,6 +193,10 @@ class CubeText extends HTMLElement {
       if (isAnimatingCube3) {
         cube3.rotation.x += 0.009;
         cube3.rotation.y += 0.02;
+      }
+      if (isAnimatingCube4) {
+        cube4.rotation.x += 0.009;
+        cube4.rotation.y += 0.02;
       }
       this.renderer.render(scene, camera);
     };
@@ -198,7 +217,7 @@ class CubeText extends HTMLElement {
       raycaster.setFromCamera(mouse, camera);
 
       // Verifica interseções com os cubos
-      const intersects = raycaster.intersectObjects([cube1, cube2, cube3]);
+      const intersects = raycaster.intersectObjects([cube1, cube2, cube3, cube4]);
 
       if (intersects.length > 0) {
         const clickedCube = intersects[0].object;
@@ -209,6 +228,8 @@ class CubeText extends HTMLElement {
           isAnimatingCube2 = !isAnimatingCube2;
         } else if (clickedCube === cube3) {
           isAnimatingCube3 = !isAnimatingCube3;
+        } else if (clickedCube === cube4) {
+          isAnimatingCube4 = !isAnimatingCube4;
         }
       }
     });
@@ -225,8 +246,8 @@ class CubeText extends HTMLElement {
     controls.minPolarAngle = 0; // ângulo mínimo (não deixa olhar de baixo pra cima)
     controls.maxPolarAngle = Math.PI / 1.8; // limita o olhar até o horizonte (um pouco acima do chão)
 
-    controls.minDistance = 2 // distância mínima da câmera ao alvo
-    controls.maxDistance = 10 // distância máxima
+    controls.minDistance = 2; // distância mínima da câmera ao alvo
+    controls.maxDistance = 30; // distância máxima
   }
 
   disconnectedCallback() {
