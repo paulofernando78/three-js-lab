@@ -39,7 +39,7 @@ class CubeText extends HTMLElement {
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
     });
-    this.resizeObserver.observe(this.shadowRoot.host.parentElement)
+    this.resizeObserver.observe(this.shadowRoot.host.parentElement);
 
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.VSMShadowMap;
@@ -220,6 +220,13 @@ class CubeText extends HTMLElement {
     controls.enableZoom = true; // permite zoom (scroll)
     controls.target.set(0, 0.5, 0); // o ponto que a câmera "orbita"
     controls.update();
+
+    // 🔥 evita passar por baixo do chão
+    controls.minPolarAngle = 0; // ângulo mínimo (não deixa olhar de baixo pra cima)
+    controls.maxPolarAngle = Math.PI / 1.8; // limita o olhar até o horizonte (um pouco acima do chão)
+
+    controls.minDistance = 2 // distância mínima da câmera ao alvo
+    controls.maxDistance = 10 // distância máxima
   }
 
   disconnectedCallback() {
