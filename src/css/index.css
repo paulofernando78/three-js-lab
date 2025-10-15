@@ -10,7 +10,7 @@ header {
   gap: 5px;
 }
 
-.nav-app-wrapper {
+main {
   display: grid;
   grid-template-columns: 103px 1fr;
   gap: 5px;

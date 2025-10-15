@@ -37,7 +37,7 @@ class Cube extends HTMLElement {
     scene.add(ambientLight, directionalLight);
 
     // Geometry + Material (Mesh)
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5);
     const material = new THREE.MeshStandardMaterial({ color: 0xeeffee });
     const cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
