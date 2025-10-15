@@ -29,12 +29,18 @@ class Cube extends HTMLElement {
     renderer.setSize(w, h);
     this.shadowRoot.appendChild(renderer.domElement);
 
-    // Ambient Light + Directional Light
+    // LIGHT
+
+    // Ambient Light
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
     ambientLight.position.set(5, 10, 5);
+    //Directional Light
     const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
     directionalLight.position.set(2, 2, 3);
-    scene.add(ambientLight, directionalLight);
+    // Light Helper
+    const directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight)
+    // Add everytinhg together
+    scene.add(ambientLight, directionalLight, directionalLightHelper);
 
     // Geometry + Material (Mesh)
     const geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5);
