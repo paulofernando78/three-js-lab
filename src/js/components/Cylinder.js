@@ -24,19 +24,21 @@ class Cylinder extends HTMLElement {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, w / h, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ antialias: true });
+
+    // Size
     renderer.setSize(w, h);
     this.shadowRoot.appendChild(renderer.domElement);
 
-    // Light
-    const Ambientlight = new THREE.AmbientLight(0xffffff, 0.3);
-    Ambientlight.position.set(5, 10, 5);
-    const directional = new THREE.DirectionalLight(0xffffff, 1);
-    directional.position.set(2, 2, 3);
-    scene.add(Ambientlight, directional);
+    // Ambient Light + Directional Light
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+    ambientLight.position.set(5, 10, 5);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight.position.set(2, 2, 3);
+    scene.add(ambientLight, directionalLight);
 
     // Geometry + Material (Mesh)
-    const geometry = new THREE.CylinderGeometry(1, 1, 1);
-    const material = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
+    const geometry = new THREE.CylinderGeometry(1, 1, 2);
+    const material = new THREE.MeshStandardMaterial({ color: 0xeeffee });
     const cylinder = new THREE.Mesh(geometry, material);
     scene.add(cylinder);
 
