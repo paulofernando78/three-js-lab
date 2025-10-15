@@ -1,16 +1,57 @@
-import cssImportsPath from "/src/css/imports.css?inline";
-import cssComponentPath from "/src/css/components/.css?inline";
+import styleImports from "/src/css/imports.css?inline";
+// import styleComponent from "/src/css/components/.css?inline";
+
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/Addons.js";
 
 class Cylinder extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
 
-    [cssImportsPath, cssComponentPath].forEach((imports) => {
-    const style = document.createElement("style");
-    style.textContent = imports;
-    this.shadowRoot.appendChild(style);
+    [styleImports].forEach((imports) => {
+      const style = document.createElement("style");
+      style.textContent = imports;
+      this.shadowRoot.appendChild(style);
     });
+  }
+
+  connectedCallback() {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+
+    // Scene + Camera + Renderer
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, w / h, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(w, h);
+    this.shadowRoot.appendChild(renderer.domElement);
+
+    // Light
+    const Ambientlight = new THREE.AmbientLight(0xffffff, 0.3);
+    Ambientlight.position.set(5, 10, 5);
+    const directional = new THREE.DirectionalLight(0xffffff, 1);
+    directional.position.set(2, 2, 3);
+    scene.add(Ambientlight, directional);
+
+    // Geometry + Material (Mesh)
+    const geometry = new THREE.CylinderGeometry(1, 1, 1);
+    const material = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
+    const cylinder = new THREE.Mesh(geometry, material);
+    scene.add(cylinder);
+
+    camera.position.z = 5;
+
+    // Animation
+    function animate() {
+      cylinder.rotation.x += 0.01;
+      cylinder.rotation.y += 0.01;
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    renderer.render(scene, camera);
   }
 }
 

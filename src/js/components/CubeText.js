@@ -46,8 +46,6 @@ class CubeText extends HTMLElement {
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.VSMShadowMap;
 
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-
     function makeTextTexture(text) {
       const canvas = document.createElement("canvas");
       const size = 256;
@@ -154,7 +152,6 @@ class CubeText extends HTMLElement {
 
     // Ambient light and directional
     const ambient = new THREE.AmbientLight(0xffffff, 0.1);
-
     const directional = new THREE.DirectionalLight(0xffffff, 1);
     directional.position.set(2, 2, 3);
     directional.castShadow = true;
@@ -182,19 +179,15 @@ class CubeText extends HTMLElement {
 
     const animate = () => {
       if (isAnimatingCube1) {
-        cube1.rotation.x += 0.02;
-        cube1.rotation.y -= 0.008;
+        cube1.rotation.y += 0.02;
       }
       if (isAnimatingCube2) {
-        cube2.rotation.x -= 0.02;
-        cube2.rotation.y += 0.007;
+        cube2.rotation.y += 0.02;
       }
       if (isAnimatingCube3) {
-        cube3.rotation.x += 0.009;
         cube3.rotation.y += 0.02;
       }
       if (isAnimatingCube4) {
-        cube4.rotation.x += 0.009;
         cube4.rotation.y += 0.02;
       }
       this.renderer.render(scene, camera);
