@@ -1,6 +1,7 @@
 const routes = {
   "/text": "wc-text",
   "/cube": "wc-cube",
+  "/sphere": "wc-sphere",
   "/cylinder": "wc-cylinder",
   "/hexagon": "wc-hexagon",
   "/cube-text": "wc-cube-text",

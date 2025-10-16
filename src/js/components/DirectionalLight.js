@@ -2,8 +2,9 @@ import styleImports from "/src/css/imports.css?inline";
 // import styleComponent from "/src/css/components/.css?inline";
 
 import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/Addons.js";
 
-class Sphere extends HTMLElement {
+class Cube extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -22,50 +23,46 @@ class Sphere extends HTMLElement {
     // Scene + Camera + Renderer
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, w / h, 0.1, 1000);
-    this.renderer = new THREE.WebGLRenderer({ antialias: true });
-    this.shadowRoot.appendChild(this.renderer.domElement);
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
 
     // Size
-    this.renderer.setSize(w, h);
+    renderer.setSize(w, h);
+    this.shadowRoot.appendChild(renderer.domElement);
 
-    // Resize (targeting #app)
-    this.resizeObserver = new ResizeObserver(() => {
-      const appContainer = this.shadowRoot.host.parentElement;
-      const { width, height } = appContainer.getBoundingClientRect();
-      this.renderer.setSize(width, height);
-      camera.aspect = width / height;
-      camera.updateProjectionMatrix();
-    });
-    this.resizeObserver.observe(this.shadowRoot.host.parentElement);
-
-    // Ambient Light + Directional Light
+    // LIGHT
+    // Ambient Light
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
     ambientLight.position.set(5, 10, 5);
+    //Directional Light
     const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
     directionalLight.position.set(2, 2, 3);
-    scene.add(ambientLight, directionalLight);
+    // Directional Light Helper
+    const directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight)
+    // Add everytinhg together
+    scene.add(ambientLight, directionalLight, directionalLightHelper);
 
     // Geometry + Material (Mesh)
-    const geometry = new THREE.SphereGeometry(1, 32, 32);
-    const material = new THREE.MeshStandardMaterial({
-      color: 0xeeffee,
-    });
+    const geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5);
+    const material = new THREE.MeshStandardMaterial({ color: 0xeeffee });
     const cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
 
     camera.position.z = 5;
 
-    // Animation
     const animate = () => {
       cube.rotation.x += 0.01;
       cube.rotation.y += 0.01;
-      this.renderer.render(scene, camera);
+      renderer.render(scene, camera);
       requestAnimationFrame(animate);
     };
     animate();
 
-    this.renderer.render(scene, camera);
+    renderer.render(scene, camera);
+  }
+
+  disconnectedCallback() {
+    renderer.dispose();
   }
 }
 
-export default Sphere;
+export default Cube;

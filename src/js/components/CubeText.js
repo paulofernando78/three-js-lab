@@ -22,17 +22,16 @@ class CubeText extends HTMLElement {
     camera.position.set(0, 3, 5);
     camera.lookAt(0, 0, 0);
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    this.shadowRoot.appendChild(this.renderer.domElement);
 
     this.renderer.setClearColor(0x222222, 1);
 
     const parent = this.shadowRoot.host.parentElement;
     const { width, height } = parent.getBoundingClientRect();
-
     this.renderer.setSize(width, height);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
 
-    this.shadowRoot.appendChild(this.renderer.domElement);
 
     this.resizeObserver = new ResizeObserver(() => {
       const parent = this.shadowRoot.host.parentElement;
@@ -90,12 +89,12 @@ class CubeText extends HTMLElement {
       "in the afternoon.",
       "in the evening.",
       "at night.",
+      "today",
       "at ???.",
-      "-",
     ];
 
     function makeTextCube(phrases, baseColor = 0xffffff) {
-      const geometry = new THREE.BoxGeometry(1, 1, 1);
+      const geometry = new THREE.CylinderGeometry(2, 2, 1, 6);
       const materials = phrases.map(
         (word) =>
           new THREE.MeshStandardMaterial({
@@ -114,7 +113,7 @@ class CubeText extends HTMLElement {
     ];
 
     const cubes = [];
-    const spacing = 1.7;
+    const spacing = 4;
 
     cubeData.forEach((data, i) => {
       const cube = makeTextCube(data.list, data.color);
@@ -249,7 +248,6 @@ class CubeText extends HTMLElement {
 
   disconnectedCallback() {
     this.renderer.dispose();
-    this.shadowRoot.innerHTML = "";
   }
 }
 

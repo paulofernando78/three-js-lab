@@ -16,13 +16,24 @@ main {
   gap: 5px;
 }
 
+.header-title {
+  font-size: 2rem;
+  font-family: "Nabla", system-ui;
+}
+
 nav {
   padding: var(--padding);
 }
 
-.header-title {
-  font-size: 2rem;
-  font-family: "Nabla", system-ui;
+.nav-title {
+  display: block;
+  margin-block: 1rem;
+  font-weight: bold;
+}
+
+a.active {
+  color: lightgray;
+  font-weight: bold;
 }
 
 #app {
@@ -31,7 +42,7 @@ nav {
 }
 
 @media (max-width: 500px) {
-  .nav-app-wrapper {
+  main {
     grid-template-columns: 1fr;
   }
 }
