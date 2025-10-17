@@ -1,4 +1,5 @@
 const routes = {
+  "/": "wc-notes",
   "/text": "wc-text",
   "/cube": "wc-cube",
   "/sphere": "wc-sphere",
