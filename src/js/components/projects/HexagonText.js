@@ -4,7 +4,7 @@ import { OrbitControls } from "three/examples/jsm/Addons.js";
 import cssimports from "/src/css/imports.css?inline";
 import cssCube from "/src/css/components/cube.css?inline";
 
-class CubeText extends HTMLElement {
+class HexagonText extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -251,4 +251,4 @@ class CubeText extends HTMLElement {
   }
 }
 
-export default CubeText;
+export default HexagonText;

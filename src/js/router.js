@@ -1,11 +1,16 @@
 const routes = {
   "/": "wc-notes",
   "/text": "wc-text",
+
+  // Geomatries
+  "/plane": "wc-plane",
   "/cube": "wc-cube",
   "/sphere": "wc-sphere",
   "/cylinder": "wc-cylinder",
   "/hexagon": "wc-hexagon",
-  "/cube-text": "wc-cube-text",
+
+  // Projects
+  "/hexagon-text": "wc-hexagon-text",
 };
 
 function setActiveLink() {
