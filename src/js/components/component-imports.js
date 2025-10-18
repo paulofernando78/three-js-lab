@@ -9,7 +9,7 @@ import Text2D from "./text/Text-2D";
 import Text3D from "./text/Text-3D";
 
 // Geomatries
-import Plane from "./geomatries/plane";
+import Plane from "./geomatries/Plane";
 import Cube from "./geomatries/Cube";
 import Sphere from "./geomatries/Sphere";
 import Cylinder from "./geomatries/Cylinder";
