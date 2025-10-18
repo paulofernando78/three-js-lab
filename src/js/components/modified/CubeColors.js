@@ -2,9 +2,9 @@ import styleImports from "/src/css/imports.css?inline";
 // import styleComponent from "/src/css/components/.css?inline";
 
 import * as THREE from "three";
-import { setupResizeObserver } from "../utils/resize";
+import { setupResizeObserver } from "../../utils/resize";
 
-class Cube extends HTMLElement {
+class CubeColors extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -44,29 +44,26 @@ class Cube extends HTMLElement {
     directionalLight.position.set(2, 2, 3);
     scene.add(ambientLight, directionalLight);
 
-    // Text (Canvas)
-    const canvas = document.createElement("canvas");
-    const context = canvas.getContext("2d");
-    context.font = "60px Arial";
-    context.fillStyle = "white";
-    context.fillText("Three JS", 10, 50);
+    // Geometry + Material (Mesh)
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const material = [
+      new THREE.MeshStandardMaterial({color: 0xff0000 }), // vermelho
+      new THREE.MeshStandardMaterial({color: 0x00ff00 }), // verde
+      new THREE.MeshStandardMaterial({color: 0x0000ff }), // azul
+      new THREE.MeshStandardMaterial({color: 0xffff00 }), // amarelo
+      new THREE.MeshStandardMaterial({color: 0xff00ff }), // magenta
+      new THREE.MeshStandardMaterial({color: 0x00ffff }), // ciano
+    ];
 
-    // Texture + Geometry + Material + Mesh
-    const texture = new THREE.CanvasTexture(canvas);
-    const geometry = new THREE.PlaneGeometry(3, 1);
-    const material = new THREE.MeshBasicMaterial({
-      map: texture,
-      transparent: true,
-    });
-    const mesh = new THREE.Mesh(geometry, material);
-    scene.add(mesh);
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
 
     camera.position.z = 5;
 
     // Animation
     const animate = () => {
-      mesh.rotation.x += 0.01;
-      mesh.rotation.y += 0.01;
+      cube.rotation.x += 0.01;
+      cube.rotation.y += 0.01;
       this.renderer.render(scene, camera);
       requestAnimationFrame(animate);
     };
@@ -76,4 +73,4 @@ class Cube extends HTMLElement {
   }
 }
 
-export default Cube;
+export default CubeColors;

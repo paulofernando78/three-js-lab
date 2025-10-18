@@ -1,6 +1,7 @@
 const routes = {
   "/": "wc-notes",
-  "/text": "wc-text",
+  "/text-2D": "wc-text-two-d",
+  "/text-3D": "wc-text-three-d",
 
   // Geomatries
   "/plane": "wc-plane",
@@ -10,6 +11,7 @@ const routes = {
   "/hexagon": "wc-hexagon",
 
   // Projects
+  "/cube-colors": "wc-cube-colors",
   "/hexagon-text": "wc-hexagon-text",
 };
 
@@ -31,7 +33,7 @@ export function router() {
     const el = document.createElement(page);
     app.appendChild(el);
   } else {
-    app.innerHTML = `<h1>404 - Page not found</h1>`;
+    app.innerHTML = `<wc-four-oh-four>`;
   }
   setActiveLink();
 }
