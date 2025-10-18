@@ -1,4 +1,4 @@
-import { router, navigateTo } from "./router";
+import { router, navigateTo } from "./router/router";
 
 document.body.addEventListener("click", (e) => {
   if (e.target.matches("[data-link]")) {

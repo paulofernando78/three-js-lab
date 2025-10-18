@@ -1,2 +1,2 @@
 import "./app"
-import "/src/js/component-imports.js"
+import "/src/js/components/component-imports.js"
