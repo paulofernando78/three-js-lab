@@ -30,37 +30,34 @@ class TextTwoDContainer extends HTMLElement {
     const aspect = w / h;
     const near = 0.1;
     const far = 100;
-    this.camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+    const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
     // Set initial camera position
-    this.camera.position.x = 0;
-    this.camera.position.y = 0;
-    this.camera.position.z = 10;
+    camera.position.x = 0;
+    camera.position.y = 0;
+    camera.position.z = 10;
     // Make the camera look at the center of the scene
-    this.camera.lookAt(0, 0, 0);
+    camera.lookAt(0, 0, 0);
 
     // CREATE RENDERER
     // The renderer drawas everything on a <canvas> element
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.shadowRoot.appendChild(this.renderer.domElement);
 
-    // Setup Orbit Controls
+    // SETUP ORBIT CONTROLS
     // Enables mouse control for rotation, zoom and pan
-    const controls = new OrbitControls(this.camera, this.renderer.domElement);
+    const controls = new OrbitControls(camera, this.renderer.domElement);
     controls.enableDamping = true; // adds smooth motion
     controls.dampingFactor = 0.5; // amount of damping (inertia)
     controls.enablePan = true; // allow dragging sideways
     controls.enableZoom = true; // allow zooming with mouse wheel
-    
     // Define the point where that the camera orbits around
     controls.target.x = 0; // o ponto que a câmera "orbita"
     controls.target.y = 0.5;
     controls.target.z = 0;
     controls.update();
-
     // Limit the up/down rotation angle (prevent going underground)
     controls.minPolarAngle = 0; // minimum vertical angle
     controls.maxPolarAngle = Math.PI / 1.8; // maximum vertical angle (~100°)
-
     // Limit how close or far the camera can zoom
     controls.minDistance = 2; // minimum zoom distance
     controls.maxDistance = 30; // maximum zom distance
@@ -73,7 +70,7 @@ class TextTwoDContainer extends HTMLElement {
     const appContainer = this.shadowRoot.host.parentElement;
     this.resizeObserver = setupResizeObserver(
       this.renderer,
-      this.camera,
+      camera,
       appContainer // (targetElement = #app)
     );
 
@@ -103,7 +100,7 @@ class TextTwoDContainer extends HTMLElement {
       cube.rotation.x += 0.01
       cube.rotation.y += 0.01
       controls.update(); // Update control (required for damping effect)
-      this.renderer.render(this.scene, this.camera);
+      this.renderer.render(this.scene, camera);
       requestAnimationFrame(animate);
     };
     animate();

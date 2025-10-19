@@ -3,7 +3,7 @@ import styleImports from "/src/css/imports.css?inline";
 
 import * as THREE from "three";
 import { setupResizeObserver } from "../../utils/resize";
-import { FontLoader, TextGeometry } from "three/examples/jsm/Addons.js";
+import { FontLoader, OrbitControls, TextGeometry } from "three/examples/jsm/Addons.js";
 
 class TextThreeD extends HTMLElement {
   constructor() {
@@ -67,7 +67,9 @@ class TextThreeD extends HTMLElement {
       const mesh = new THREE.Mesh(geometry, material);
       scene.add(mesh);
 
-      camera.position.z = 5;
+      camera.position.z = 6;
+
+      const controls = new OrbitControls(cameraNear, this.renderer.domElement)
 
       const animate = () => {
         this.renderer.render(scene, camera);
