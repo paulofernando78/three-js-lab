@@ -4,7 +4,7 @@ import styleImports from "/src/css/imports.css?inline";
 import * as THREE from "three";
 import { setupResizeObserver } from "../../utils/resize";
 
-class Text2D extends HTMLElement {
+class Text2DAngle extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -23,6 +23,26 @@ class Text2D extends HTMLElement {
     // Scene + Camera + Renderer
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, w / h, 0.1, 1000);
+
+    // Camera Position
+    camera.position.x = 0;
+    camera.position.y = 0;
+    camera.position.z = 5;
+
+    // Camera Rotatin
+    camera.rotation.y = -Math.PI / 5;
+
+    // Center
+    const distance = 5;
+    const angle = Math.PI / 5;
+
+    camera.position.set(
+      -Math.sin(angle) * distance, // X axis → left/right
+      0, // Y axis → height
+      Math.cos(angle) * distance // Z axis → forward/backward
+    );
+    camera.lookAt(0, 0, 0);
+
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.shadowRoot.appendChild(this.renderer.domElement);
 
@@ -37,6 +57,17 @@ class Text2D extends HTMLElement {
       appContainer
     );
 
+    // Ambient Light + Directional Light
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    ambientLight.position.x = 1;
+    ambientLight.position.y = 1;
+    ambientLight.position.z = 1;
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight.position.x = 1;
+    directionalLight.position.y = 1;
+    directionalLight.position.z = 1
+    scene.add(ambientLight, directionalLight)
+
     // Text (Canvas)
     const canvas = document.createElement("canvas");
     canvas.width = 512;
@@ -48,7 +79,6 @@ class Text2D extends HTMLElement {
 
     context.strokeStyle = "red";
     context.lineWidth = 10;
-    // context.strokeRect(0, 0, canvas.width, canvas.height)
 
     const radius = 50;
     context.beginPath();
@@ -62,19 +92,16 @@ class Text2D extends HTMLElement {
     // Texture + Geometry + Material + Mesh
     const texture = new THREE.CanvasTexture(canvas);
     const geometry = new THREE.PlaneGeometry(3, 1);
-    const material = new THREE.MeshBasicMaterial({
+    const material = new THREE.MeshStandardMaterial({
       map: texture,
+      transparent: true
     });
     const mesh = new THREE.Mesh(geometry, material);
 
     scene.add(mesh);
 
-    camera.position.z = 5;
-
     // Animation
     const animate = () => {
-      mesh.rotation.x += 0.01;
-      mesh.rotation.y += 0.01;
       this.renderer.render(scene, camera);
       requestAnimationFrame(animate);
     };
@@ -82,6 +109,11 @@ class Text2D extends HTMLElement {
 
     this.renderer.render(scene, camera);
   }
+
+  disconnectedCallback() {
+    this.resizeObserver?.disconnect;
+    this.renderer?.dispose();
+  }
 }
 
-export default Text2D;
+export default Text2DAngle;

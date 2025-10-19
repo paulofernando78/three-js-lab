@@ -1,7 +1,7 @@
 const routes = {
   "/": "wc-notes",
-  "/text-2D": "wc-text-two-d",
-  "/text-3D": "wc-text-three-d",
+  "/text-2D-container": "wc-text-two-d-container",
+  "/text-3D-container": "wc-text-three-d",
 
   // Geomatries
   "/plane": "wc-plane",

@@ -5,8 +5,10 @@ import Notes from "./Notes";
 import Section from "./Section";
 
 // Plain
-import Text2D from "./text/Text-2D";
-import Text3D from "./text/Text-3D";
+import TextTwoDContainer from "./text/TextTwoDContainer";
+import TextTwoD from "./text/TextTwod";
+import TextTwoDAngle from "./text/TextTwoDAngle";
+import TextThreeD from "./text/TextThreeD";
 
 // Geomatries
 import Plane from "./geomatries/Plane";
@@ -29,9 +31,11 @@ customElements.define("wc-four-oh-four", FourOhFour);
 customElements.define("wc-notes", Notes);
 customElements.define("wc-section", Section);
 
-// Plain
-customElements.define("wc-text-two-d", Text2D);
-customElements.define("wc-text-three-d", Text3D);
+// Text
+customElements.define("wc-text-two-d-container", TextTwoDContainer);
+customElements.define("wc-text-two-d", TextTwoD);
+customElements.define("wc-text-two-d-angle", TextTwoDAngle);
+customElements.define("wc-text-three-d", TextThreeD);
 
 // Geomatries
 customElements.define("wc-plane", Plane);

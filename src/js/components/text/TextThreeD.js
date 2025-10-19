@@ -5,7 +5,7 @@ import * as THREE from "three";
 import { setupResizeObserver } from "../../utils/resize";
 import { FontLoader, TextGeometry } from "three/examples/jsm/Addons.js";
 
-class Text3D extends HTMLElement {
+class TextThreeD extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -47,8 +47,7 @@ class Text3D extends HTMLElement {
 
     const loader = new FontLoader();
     loader.load("/fonts/BBHSansBartle_Regular.json", (font) => {
-
-      // Geometry 
+      // Geometry
       const geometry = new TextGeometry("Three.js", {
         font: font,
         size: 0.4,
@@ -56,7 +55,7 @@ class Text3D extends HTMLElement {
         curveSegments: 6,
         bevelEnabled: true,
         bevelThickness: 0.08,
-        bevelSize: 0.01,
+        bevelSize: 0.05,
         bevelOffset: 0,
         bevelSegments: 2,
       });
@@ -70,18 +69,15 @@ class Text3D extends HTMLElement {
 
       camera.position.z = 5;
 
-      // Animation
       const animate = () => {
-        mesh.rotation.x += 0.01;
-        // mesh.rotation.y += 0.01;
         this.renderer.render(scene, camera);
         requestAnimationFrame(animate);
       };
       animate();
-    });
 
-    this.renderer.render(scene, camera);
+      this.renderer.render(scene, camera);
+    });
   }
 }
 
-export default Text3D;
+export default TextThreeD;
