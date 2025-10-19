@@ -4,9 +4,10 @@ import FourOhFour from "./FourOhFour";
 import Notes from "./Notes";
 import Section from "./Section";
 
-// Plain
 import TextTwoDContainer from "./text/TextTwoDContainer";
-import TextTwoD from "./text/TextTwod";
+
+// Text
+import TextTwoD from "./text/TextTwoD.js";
 import TextTwoDAngle from "./text/TextTwoDAngle";
 import TextThreeD from "./text/TextThreeD";
 

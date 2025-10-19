@@ -6,6 +6,12 @@ header {
   padding: var(--padding);
 }
 
+body {
+  margin-bottom: 50px;
+  padding: 5px;
+  overflow: hidden;
+}
+
 .wrapper {
   max-width: 1366px;
   margin: 0 auto;
@@ -15,7 +21,7 @@ header {
 }
 
 main {
-  height: calc(100dvh - var(--header-height));
+  height: calc(98.3dvh - var(--header-height));
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 5px;
@@ -43,6 +49,8 @@ a.active {
 
 #app {
   width: 100%;
+  height: calc(100%);
+  overflow-y: auto;
 }
 
 @media (max-width: 700px) {

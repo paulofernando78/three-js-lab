@@ -1,5 +1,4 @@
 import styleImports from "/src/css/imports.css?inline";
-// import styleComponent from "/src/css/components/.css?inline";
 
 import * as THREE from "three";
 import { setupResizeObserver } from "../../utils/resize";
@@ -17,8 +16,9 @@ class TextTwoDAngle extends HTMLElement {
   }
 
   connectedCallback() {
-    const w = window.innerWidth;
-    const h = window.innerHeight;
+    const { width, height } = this.getBoundingClientRect()
+    const w = width || 400;
+    const h = height || 400;
 
     // Scene + Camera + Renderer
     const scene = new THREE.Scene();
@@ -27,9 +27,9 @@ class TextTwoDAngle extends HTMLElement {
     // Camera Position
     camera.position.x = 0;
     camera.position.y = 0;
-    camera.position.z = 5;
+    camera.position.z = 3;
 
-    // Camera Rotatin
+    // Camera Rotation
     camera.rotation.y = -Math.PI / 5;
 
     // Center
@@ -44,13 +44,14 @@ class TextTwoDAngle extends HTMLElement {
     camera.lookAt(0, 0, 0);
 
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
+    this.renderer.domElement.className = "container-border"
     this.shadowRoot.appendChild(this.renderer.domElement);
 
     // Size
     this.renderer.setSize(w, h);
 
     // Resize (targetElement = #app)
-    const appContainer = this.shadowRoot.host.parentElement;
+    const appContainer = this.closest("wc-text-two-d-container") || this;
     this.resizeObserver = setupResizeObserver(
       this.renderer,
       camera,

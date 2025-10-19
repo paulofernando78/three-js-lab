@@ -3,7 +3,11 @@ import styleImports from "/src/css/imports.css?inline";
 
 import * as THREE from "three";
 import { setupResizeObserver } from "../../utils/resize";
-import { FontLoader, OrbitControls, TextGeometry } from "three/examples/jsm/Addons.js";
+import {
+  FontLoader,
+  OrbitControls,
+  TextGeometry,
+} from "three/examples/jsm/Addons.js";
 
 class TextThreeD extends HTMLElement {
   constructor() {
@@ -45,6 +49,7 @@ class TextThreeD extends HTMLElement {
     directionalLight.position.set(2, 2, 3);
     scene.add(ambientLight, directionalLight);
 
+    // TEXT (FontLoader)
     const loader = new FontLoader();
     loader.load("/fonts/BBHSansBartle_Regular.json", (font) => {
       // Geometry
@@ -62,14 +67,14 @@ class TextThreeD extends HTMLElement {
 
       geometry.center();
 
-      //Material + Mesh
+      // Material + Mesh
       const material = new THREE.MeshStandardMaterial();
       const mesh = new THREE.Mesh(geometry, material);
       scene.add(mesh);
 
       camera.position.z = 6;
 
-      const controls = new OrbitControls(cameraNear, this.renderer.domElement)
+      const controls = new OrbitControls(camera, this.renderer.domElement);
 
       const animate = () => {
         this.renderer.render(scene, camera);

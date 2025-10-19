@@ -2,7 +2,7 @@ import styleImports from "/src/css/imports.css?inline";
 // import styleComponent from "/src/css/components/.css?inline";
 
 import * as THREE from "three";
-import { setupResizeObserver } from "../../utils/resize";
+import { setupResizeObserver } from "../utils/resize";
 import { OrbitControls } from "three/examples/jsm/Addons.js";
 
 class TextTwoDContainer extends HTMLElement {
