@@ -3,6 +3,7 @@ import styleImports from "/src/css/imports.css?inline";
 
 import * as THREE from "three";
 import { setupResizeObserver } from "../../utils/resize";
+import { FontLoader, TextGeometry } from "three/examples/jsm/Addons.js";
 
 class Text3D extends HTMLElement {
   constructor() {
@@ -44,33 +45,40 @@ class Text3D extends HTMLElement {
     directionalLight.position.set(2, 2, 3);
     scene.add(ambientLight, directionalLight);
 
-    // Text (Canvas)
-    const canvas = document.createElement("canvas");
-    const context = canvas.getContext("2d");
-    context.font = "60px Arial";
-    context.fillStyle = "white";
-    context.fillText("Three JS", 10, 50);
+    const loader = new FontLoader();
+    loader.load("/fonts/BBHSansBartle_Regular.json", (font) => {
 
-    // Texture + Geometry + Material + Mesh
-    const texture = new THREE.CanvasTexture(canvas);
-    const geometry = new THREE.PlaneGeometry(3, 1);
-    const material = new THREE.MeshBasicMaterial({
-      map: texture,
-      transparent: true,
+      // Geometry 
+      const geometry = new TextGeometry("Three.js", {
+        font: font,
+        size: 0.4,
+        depth: 0.1,
+        curveSegments: 6,
+        bevelEnabled: true,
+        bevelThickness: 0.08,
+        bevelSize: 0.01,
+        bevelOffset: 0,
+        bevelSegments: 2,
+      });
+
+      geometry.center();
+
+      //Material + Mesh
+      const material = new THREE.MeshStandardMaterial();
+      const mesh = new THREE.Mesh(geometry, material);
+      scene.add(mesh);
+
+      camera.position.z = 5;
+
+      // Animation
+      const animate = () => {
+        mesh.rotation.x += 0.01;
+        // mesh.rotation.y += 0.01;
+        this.renderer.render(scene, camera);
+        requestAnimationFrame(animate);
+      };
+      animate();
     });
-    const mesh = new THREE.Mesh(geometry, material);
-    scene.add(mesh);
-
-    camera.position.z = 5;
-
-    // Animation
-    const animate = () => {
-      mesh.rotation.x += 0.01;
-      mesh.rotation.y += 0.01;
-      this.renderer.render(scene, camera);
-      requestAnimationFrame(animate);
-    };
-    animate();
 
     this.renderer.render(scene, camera);
   }

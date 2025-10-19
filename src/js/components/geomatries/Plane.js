@@ -23,6 +23,7 @@ class Plane extends HTMLElement {
     // Scene + Camera + Renderer
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, w / h, 0.1, 1000);
+    camera.lookAt(0, 0 , 0)
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.shadowRoot.appendChild(this.renderer.domElement);
     

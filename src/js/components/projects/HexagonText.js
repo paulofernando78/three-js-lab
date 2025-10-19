@@ -20,7 +20,6 @@ class HexagonText extends HTMLElement {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
     camera.position.set(0, 3, 5);
-    camera.lookAt(0, 0, 0);
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     this.shadowRoot.appendChild(this.renderer.domElement);
 

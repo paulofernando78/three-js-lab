@@ -39,25 +39,33 @@ class Text2D extends HTMLElement {
 
     // Text (Canvas)
     const canvas = document.createElement("canvas");
+    canvas.width = 512;
+    canvas.height = 256;
     const context = canvas.getContext("2d");
-    context.font = "60px Arial";
+    context.font = "100px Arial";
+
     context.fillStyle = "white";
-    context.fillText("Three JS", 10, 50);
+
+    context.strokeStyle = "red";
+    context.lineWidth = 10;
+    // context.strokeRect(0, 0, canvas.width, canvas.height)
+
+    const radius = 50;
+    context.beginPath();
+    context.roundRect(0, 0, canvas.width, canvas.height, radius);
+    context.stroke();
+
+    context.textAlign = "center";
+    context.textBaseline = "middle";
+    context.fillText("Three JS", canvas.width / 2, canvas.height / 2);
 
     // Texture + Geometry + Material + Mesh
     const texture = new THREE.CanvasTexture(canvas);
     const geometry = new THREE.PlaneGeometry(3, 1);
     const material = new THREE.MeshBasicMaterial({
       map: texture,
-      transparent: true
     });
     const mesh = new THREE.Mesh(geometry, material);
-
-    //Position
-    mesh.position.x = 0 
-    mesh.position.y = 0
-    mesh.position.z = 0
-    // mesh.position.set(0, 0, 0)
 
     scene.add(mesh);
 
@@ -65,8 +73,8 @@ class Text2D extends HTMLElement {
 
     // Animation
     const animate = () => {
-      // mesh.rotation.x += 0.01;
-      // mesh.rotation.y += 0.01;
+      mesh.rotation.x += 0.01;
+      mesh.rotation.y += 0.01;
       this.renderer.render(scene, camera);
       requestAnimationFrame(animate);
     };
