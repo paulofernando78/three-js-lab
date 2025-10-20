@@ -1,24 +1,30 @@
 const routes = {
   "/": "wc-notes",
 
-  // TEXT
+  //! TEXTS
   "/text-2D-container": "wc-text-two-d-container",
   "/text-3D-container": "wc-text-three-d",
 
-  // TYPE OF GEOMETRIES
+  //! TYPE OF GEOMETRIES
+  
   // Plane
   "/plane": "wc-plane",
+  
   // Cube
   "/cube": "wc-cube",
   "/cube-colors": "wc-cube-colors",
+  
   // Sphere
   "/sphere": "wc-sphere",
+  "/sphere-colors": "wc-sphere-colors",
+  
   // Cylinder
   "/cylinder": "wc-cylinder",
+  
   // Hexagon
   "/hexagon": "wc-hexagon",
 
-  // PROJECTS
+  //! PROJECTS
   "/hexagon-text": "wc-hexagon-text",
 };
 

@@ -1,50 +1,79 @@
-import FourOhFour from "./FourOhFour";
 
-// General
+//! GENERAL
+
+import FourOhFour from "./FourOhFour";
 import Notes from "./Notes";
 import Section from "./Section";
 
-import TextTwoDContainer from "./text/TextTwoDContainer";
 
-// Text
+//! TEXTS
+
+// 2D
 import TextTwoD from "./text/TextTwoD.js";
+import TextTwoDContainer from "./text/TextTwoDContainer";
 import TextTwoDAngle from "./text/TextTwoDAngle";
+// 3D
 import TextThreeD from "./text/TextThreeD";
 
-// Geomatries
-import Plane from "./geomatries/Plane";
-import Cube from "./geomatries/Cube";
-import Sphere from "./geomatries/Sphere";
-import Cylinder from "./geomatries/Cylinder";
-import Hexagon from "./geomatries/Hexagon";
+//! TYPES OF GEOMETRIES
 
-// Projects
+// Planes
+import Plane from "./geomatries/Plane";
+
+// Cube
+import Cube from "./geomatries/Cube";
 import CubeColors from "./modified/CubeColors";
 
-// Projects
+// Cylinder
+import Sphere from "./geomatries/Sphere";
+import SphereColors from "./geomatries/SphereColor.js";
+
+// Cylinder
+import Cylinder from "./geomatries/Cylinder";
+
+// Hexagon
+import Hexagon from "./geomatries/Hexagon";
+
+//! PROJECTS
 import HexagonText from "./projects/HexagonText";
 
 // --------------------
 
-customElements.define("wc-four-oh-four", FourOhFour);
 
-// General
+//! GENERAL
+
+customElements.define("wc-four-oh-four", FourOhFour);
 customElements.define("wc-notes", Notes);
 customElements.define("wc-section", Section);
 
-// Text
+//! TEXT
+
+// 2D
 customElements.define("wc-text-two-d-container", TextTwoDContainer);
 customElements.define("wc-text-two-d", TextTwoD);
 customElements.define("wc-text-two-d-angle", TextTwoDAngle);
+// 3D
 customElements.define("wc-text-three-d", TextThreeD);
 
-// Geomatries
+//! GEOMETRIES
+
+// Planes
 customElements.define("wc-plane", Plane);
+
+// Cubes
 customElements.define("wc-cube", Cube);
+customElements.define("wc-cube-colors", CubeColors);
+
+// Spheres
 customElements.define("wc-sphere", Sphere);
+customElements.define("wc-sphere-colors", SphereColors);
+
+// Cylinders
 customElements.define("wc-cylinder", Cylinder);
+
+// Hexagons
 customElements.define("wc-hexagon", Hexagon);
 
-// Projects
-customElements.define("wc-cube-colors", CubeColors);
+//! PROJECTS
+
 customElements.define("wc-hexagon-text", HexagonText);
