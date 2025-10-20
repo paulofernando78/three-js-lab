@@ -4,12 +4,14 @@
 
 header {
   padding: var(--padding);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 }
 
 body {
-  margin-bottom: 50px;
   padding: 5px;
-  overflow: hidden;
 }
 
 .wrapper {
@@ -21,7 +23,7 @@ body {
 }
 
 main {
-  height: calc(98.3dvh - var(--header-height));
+  height: calc(97.3dvh - var(--header-height));
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 5px;
@@ -34,6 +36,7 @@ main {
 
 nav {
   padding: var(--padding);
+  overflow-y: auto; 
 }
 
 .nav-title {

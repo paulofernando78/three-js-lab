@@ -2,9 +2,9 @@ import styleImports from "/src/css/imports.css?inline";
 // import styleComponent from "/src/css/components/.css?inline";
 
 import * as THREE from "three";
-import { setupResizeObserver } from "../../utils/resize";
+import { setupResizeObserver } from "../../../utils/resize";
 
-class CubeColors extends HTMLElement {
+class SphereColors extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -29,13 +29,15 @@ class CubeColors extends HTMLElement {
     // Size
     this.renderer.setSize(w, h);
 
-    // Resize (targetElement = #app)
-    const appContainer = this.shadowRoot.host.parentElement;
-    this.resizeObserver = setupResizeObserver(
-      this.renderer,
-      camera,
-      appContainer
-    );
+    // Resize (targeting #app)
+    this.resizeObserver = new ResizeObserver(() => {
+      const appContainer = this.shadowRoot.host.parentElement;
+      const { width, height } = appContainer.getBoundingClientRect();
+      this.renderer.setSize(width, height);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+    });
+    this.resizeObserver.observe(this.shadowRoot.host.parentElement);
 
     // Ambient Light + Directional Light
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
@@ -45,25 +47,29 @@ class CubeColors extends HTMLElement {
     scene.add(ambientLight, directionalLight);
 
     // Geometry + Material (Mesh)
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = [
-      new THREE.MeshStandardMaterial({color: 0xff0000 }), // vermelho
-      new THREE.MeshStandardMaterial({color: 0x00ff00 }), // verde
-      new THREE.MeshStandardMaterial({color: 0x0000ff }), // azul
-      new THREE.MeshStandardMaterial({color: 0xffff00 }), // amarelo
-      new THREE.MeshStandardMaterial({color: 0xff00ff }), // magenta
-      new THREE.MeshStandardMaterial({color: 0x00ffff }), // ciano
-    ];
+    const geometry = new THREE.SphereGeometry(1, 32, 32);
+    const colors = [];
+    const color = new THREE.Color();
+    
+    for (let i = 0; i < geometry.attributes.position.count; i++) {
+      color.setHSL(i / geometry.attributes.position.count, 1.0, 0.5);
+      colors.push(color.r, color.g, color.b);
+    }
 
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+    geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
+
+    const material = new THREE.MeshStandardMaterial({
+      vertexColors: true,
+    });
+    const sphere = new THREE.Mesh(geometry, material);
+    scene.add(sphere);
 
     camera.position.z = 5;
 
     // Animation
     const animate = () => {
-      cube.rotation.x += 0.01;
-      cube.rotation.y += 0.01;
+      sphere.rotation.x += 0.01;
+      sphere.rotation.y += 0.01;
       this.renderer.render(scene, camera);
       requestAnimationFrame(animate);
     };
@@ -73,4 +79,4 @@ class CubeColors extends HTMLElement {
   }
 }
 
-export default CubeColors;
+export default SphereColors;

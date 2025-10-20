@@ -1,7 +1,7 @@
 import styleImports from "/src/css/imports.css?inline";
 // import styleContainer from "/src/css/components/text-two-d/container.css?inline";
 
-class TextTwoDContainer extends HTMLElement {
+class TextTwoDDisplayContainer extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -20,4 +20,4 @@ class TextTwoDContainer extends HTMLElement {
   }
 }
 
-export default TextTwoDContainer;
+export default TextTwoDDisplayContainer;

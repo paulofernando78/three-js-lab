@@ -36,25 +36,6 @@ class HexagonText extends HTMLElement {
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.shadowRoot.appendChild(this.renderer.domElement);
 
-    const controls = new OrbitControls(camera, this.renderer.domElement);
-    controls.enableDamping = true; // adds smooth motion
-    controls.dampingFactor = 0.5; // amount of damping (inertia)
-    controls.enablePan = true; // allow dragging sideways
-    controls.enableZoom = true; // allow zooming with mouse wheel
-
-    // Define the point where that the camera orbits around
-    controls.target.x = 0; // o ponto que a câmera "orbita"
-    controls.target.y = 0.5;
-    controls.target.z = 0;
-    controls.update();
-
-    // Limit the up/down rotation angle (prevent going underground)
-    controls.minPolarAngle = 0; // minimum vertical angle
-    controls.maxPolarAngle = Math.PI / 1.8; // maximum vertical angle (~100°)
-
-    controls.minDistance = 2; // minimum zoom distance
-    controls.maxDistance = 30; // maximum zom distance
-
     this.renderer.setSize(w, h);
 
     const appContainer = this.shadowRoot.host.parentElement;
@@ -81,6 +62,24 @@ class HexagonText extends HTMLElement {
 
     const plane = new THREE.PlaneGeometry(1, 1, 1);
     
+    const controls = new OrbitControls(camera, this.renderer.domElement);
+    controls.enableDamping = true; // adds smooth motion
+    controls.dampingFactor = 0.5; // amount of damping (inertia)
+    controls.enablePan = true; // allow dragging sideways
+    controls.enableZoom = true; // allow zooming with mouse wheel
+
+    // Define the point where that the camera orbits around
+    controls.target.x = 0; // o ponto que a câmera "orbita"
+    controls.target.y = 0.5;
+    controls.target.z = 0;
+    controls.update();
+
+    // Limit the up/down rotation angle (prevent going underground)
+    controls.minPolarAngle = 0; // minimum vertical angle
+    controls.maxPolarAngle = Math.PI / 1.8; // maximum vertical angle (~100°)
+
+    controls.minDistance = 2; // minimum zoom distance
+    controls.maxDistance = 30; // maximum zom distance
 
     const animate = () => {
       hexagon.rotation.y += 0.01;

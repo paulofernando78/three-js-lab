@@ -2,9 +2,9 @@ import styleImports from "/src/css/imports.css?inline";
 // import styleComponent from "/src/css/components/.css?inline";
 
 import * as THREE from "three";
-import { setupResizeObserver } from "../../utils/resize";
+import { setupResizeObserver } from "../../../utils/resize";
 
-class SphereColors extends HTMLElement {
+class Sphere extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -48,28 +48,18 @@ class SphereColors extends HTMLElement {
 
     // Geometry + Material (Mesh)
     const geometry = new THREE.SphereGeometry(1, 32, 32);
-    const colors = [];
-    const color = new THREE.Color();
-    
-    for (let i = 0; i < geometry.attributes.position.count; i++) {
-      color.setHSL(i / geometry.attributes.position.count, 1.0, 0.5);
-      colors.push(color.r, color.g, color.b);
-    }
-
-    geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
-
     const material = new THREE.MeshStandardMaterial({
-      vertexColors: true,
+      color: 0xeeffee,
     });
-    const sphere = new THREE.Mesh(geometry, material);
-    scene.add(sphere);
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
 
     camera.position.z = 5;
 
     // Animation
     const animate = () => {
-      sphere.rotation.x += 0.01;
-      sphere.rotation.y += 0.01;
+      cube.rotation.x += 0.01;
+      cube.rotation.y += 0.01;
       this.renderer.render(scene, camera);
       requestAnimationFrame(animate);
     };
@@ -79,4 +69,4 @@ class SphereColors extends HTMLElement {
   }
 }
 
-export default SphereColors;
+export default Sphere;

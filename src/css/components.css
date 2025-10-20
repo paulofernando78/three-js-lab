@@ -3,13 +3,14 @@
   border-radius: var(--border-radius);
   overflow: hidden;
 }
-:host {
+
+.display-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.container-border {
+.display-container-border {
   border-radius: 5px;
   height: calc(100%-2px)
 }

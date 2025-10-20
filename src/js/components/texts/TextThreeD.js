@@ -75,6 +75,7 @@ class TextThreeD extends HTMLElement {
       camera.position.z = 6;
 
       const controls = new OrbitControls(camera, this.renderer.domElement);
+      controls.update();
 
       const animate = () => {
         this.renderer.render(scene, camera);

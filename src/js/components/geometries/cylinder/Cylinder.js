@@ -2,9 +2,9 @@ import styleImports from "/src/css/imports.css?inline";
 // import styleComponent from "/src/css/components/.css?inline";
 
 import * as THREE from "three";
-import { setupResizeObserver } from "../../utils/resize";
+import { setupResizeObserver } from "../../../utils/resize";
 
-class Plane extends HTMLElement {
+class Cylinder extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -19,20 +19,22 @@ class Plane extends HTMLElement {
   connectedCallback() {
     const w = window.innerWidth;
     const h = window.innerHeight;
-    
+
     // Scene + Camera + Renderer
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, w / h, 0.1, 1000);
-    camera.lookAt(0, 0 , 0)
-    this.renderer = new THREE.WebGLRenderer({ antialias: true });
-    this.shadowRoot.appendChild(this.renderer.domElement);
-    
-    // Size
-    this.renderer.setSize(w, h);
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
 
-    // Resize (targetElement = #app)
+    // Size
+    renderer.setSize(w, h);
+    this.shadowRoot.appendChild(renderer.domElement);
+
     const appContainer = this.shadowRoot.host.parentElement;
-    this.resizeObserver = setupResizeObserver(this.renderer, camera, appContainer)
+    this.resizeObserver = setupResizeObserver(
+      this.renderer,
+      camera,
+      appContainer
+    );
 
     // Ambient Light + Directional Light
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
@@ -42,26 +44,24 @@ class Plane extends HTMLElement {
     scene.add(ambientLight, directionalLight);
 
     // Geometry + Material (Mesh)
-    const geometry = new THREE.PlaneGeometry(3, 3);
-    const material = new THREE.MeshStandardMaterial({
-      color: 0xeeffee,
-    });
-    const plane = new THREE.Mesh(geometry, material);
-    scene.add(plane);
+    const geometry = new THREE.CylinderGeometry(1, 1, 2);
+    const material = new THREE.MeshStandardMaterial({ color: 0xeeffee });
+    const cylinder = new THREE.Mesh(geometry, material);
+    scene.add(cylinder);
 
     camera.position.z = 5;
 
     // Animation
-    const animate = () => {
-      plane.rotation.x += 0.01;
-      plane.rotation.y += 0.01;
-      this.renderer.render(scene, camera);
+    function animate() {
+      cylinder.rotation.x += 0.01;
+      cylinder.rotation.y += 0.01;
+      renderer.render(scene, camera);
       requestAnimationFrame(animate);
-    };
+    }
     animate();
 
-    this.renderer.render(scene, camera);
+    renderer.render(scene, camera);
   }
 }
 
-export default Plane;
+export default Cylinder;

@@ -39,7 +39,7 @@ class TextTwoD extends HTMLElement {
     this.renderer.setSize(w, h);
 
     // Resize (targetElement = #app)
-    const appContainer = this.closest("wc-text-two-d-container") || this;
+    const appContainer = this.closest("wc-text-two-d-display-container") || this;
     this.resizeObserver = setupResizeObserver(
       this.renderer,
       camera,

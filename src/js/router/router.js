@@ -2,27 +2,25 @@ const routes = {
   "/": "wc-notes",
 
   //! TEXTS
-  "/text-2D-container": "wc-text-two-d-container",
-  "/text-3D-container": "wc-text-three-d",
+  "/text-2D": "wc-text-two-d-display-container",
+  "/text-3D": "wc-text-three-d-display-container",
 
   //! TYPE OF GEOMETRIES
   
   // Plane
-  "/plane": "wc-plane",
+  "/plane": "wc-plane-display-container",
   
   // Cube
-  "/cube": "wc-cube",
-  "/cube-colors": "wc-cube-colors",
+  "/cube": "wc-cube-display-container",
   
   // Sphere
-  "/sphere": "wc-sphere",
-  "/sphere-colors": "wc-sphere-colors",
+  "/sphere": "wc-sphere-display-container",
   
   // Cylinder
-  "/cylinder": "wc-cylinder",
+  "/cylinder": "wc-cylinder-display-container",
   
   // Hexagon
-  "/hexagon": "wc-hexagon",
+  "/hexagon": "wc-hexagon-display-container",
 
   //! PROJECTS
   "/hexagon-text": "wc-hexagon-text",
