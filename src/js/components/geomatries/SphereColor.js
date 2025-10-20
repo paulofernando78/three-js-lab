@@ -48,18 +48,28 @@ class SphereColors extends HTMLElement {
 
     // Geometry + Material (Mesh)
     const geometry = new THREE.SphereGeometry(1, 32, 32);
+    const colors = [];
+    const color = new THREE.Color();
+    
+    for (let i = 0; i < geometry.attributes.position.count; i++) {
+      color.setHSL(i / geometry.attributes.position.count, 1.0, 0.5);
+      colors.push(color.r, color.g, color.b);
+    }
+
+    geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
+
     const material = new THREE.MeshStandardMaterial({
-      color: 0xeeffee,
+      vertexColors: true,
     });
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+    const sphere = new THREE.Mesh(geometry, material);
+    scene.add(sphere);
 
     camera.position.z = 5;
 
     // Animation
     const animate = () => {
-      cube.rotation.x += 0.01;
-      cube.rotation.y += 0.01;
+      sphere.rotation.x += 0.01;
+      sphere.rotation.y += 0.01;
       this.renderer.render(scene, camera);
       requestAnimationFrame(animate);
     };
