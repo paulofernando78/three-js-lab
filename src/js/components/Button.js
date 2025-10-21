@@ -1,4 +1,4 @@
-import styleImports from "/src/css/imports.css?inline";
+import styleImports from "/src/css/styles.css?inline";
 // import styleComponent from "/src/css/components/.css?inline";
 
 class Button extends HTMLElement {
@@ -13,10 +13,10 @@ class Button extends HTMLElement {
     });
   }
   connectedCallback() {
-    const label = this.getAttribute("label")
+    const label = this.getAttribute("label");
 
     const btn = document.createElement("button");
-    btn.textContent = label
+    btn.textContent = label;
     this.shadowRoot.appendChild(btn);
   }
 }

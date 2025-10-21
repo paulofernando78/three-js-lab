@@ -1,4 +1,4 @@
-import styleImports from "/src/css/imports.css?inline";
+import styleImports from "/src/css/styles.css?inline";
 // import styleComponent from "/src/css/components/.css?inline";
 
 import * as THREE from "three";
@@ -47,12 +47,12 @@ class CubeColors extends HTMLElement {
     // Geometry + Material (Mesh)
     const geometry = new THREE.BoxGeometry(1, 1, 1);
     const material = [
-      new THREE.MeshStandardMaterial({color: 0xff0000 }), // vermelho
-      new THREE.MeshStandardMaterial({color: 0x00ff00 }), // verde
-      new THREE.MeshStandardMaterial({color: 0x0000ff }), // azul
-      new THREE.MeshStandardMaterial({color: 0xffff00 }), // amarelo
-      new THREE.MeshStandardMaterial({color: 0xff00ff }), // magenta
-      new THREE.MeshStandardMaterial({color: 0x00ffff }), // ciano
+      new THREE.MeshStandardMaterial({ color: 0xff0000 }), // vermelho
+      new THREE.MeshStandardMaterial({ color: 0x00ff00 }), // verde
+      new THREE.MeshStandardMaterial({ color: 0x0000ff }), // azul
+      new THREE.MeshStandardMaterial({ color: 0xffff00 }), // amarelo
+      new THREE.MeshStandardMaterial({ color: 0xff00ff }), // magenta
+      new THREE.MeshStandardMaterial({ color: 0x00ffff }), // ciano
     ];
 
     const cube = new THREE.Mesh(geometry, material);

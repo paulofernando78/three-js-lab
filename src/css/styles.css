@@ -1,3 +1,7 @@
+@import "/src/css/index.css";
+
+/* ---------- */
+
 @import "/src/css/components.css";
 
 /* base */
@@ -7,6 +11,6 @@
 /* theme */
 @import "/src/css/theme/colors.css";
 
-/* utiities */
+/* utilities */
 @import "/src/css/utilities/border.css";
 @import "/src/css/utilities/spacing.css";

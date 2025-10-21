@@ -4,6 +4,7 @@ import Button from "./Button";
 import FourOhFour from "./FourOhFour";
 import Notes from "./Notes";
 import Section from "./Section";
+import PageRenderer from "./PageRenderer.js";
 
 //! TEXTS
 
@@ -17,11 +18,11 @@ import TextThreeD from "./texts/TextThreeD";
 //! TYPES OF GEOMETRIES
 
 // Plane
-import PlaneDisplayContainer from "./geometries/plane/PlaneDisplayContainer.js";
+import PlaneRenderer from "./geometries/plane/PlaneRenderer.js";
 import Plane from "./geometries/plane/Plane";
+import PlaneFrontBackColors from "./geometries/plane/PlaneFrontBackColors.js";
 
 // Cube
-import CubeDisplayContainer from "./geometries/Cube/CubeDisplayContainer.js";
 import Cube from "./geometries/cube/Cube";
 import CubeColors from "./geometries/Cube/CubeColors";
 
@@ -46,11 +47,12 @@ customElements.define("wc-button", Button);
 customElements.define("wc-four-oh-four", FourOhFour);
 customElements.define("wc-notes", Notes);
 customElements.define("wc-section", Section);
+customElements.define("wc-page-renderer", PageRenderer);
 
 //! TEXT
 
 // 2D
-customElements.define("wc-text-two-d-display-container", TextTwoDDisplayContainer);
+customElements.define("wc-text-two-d-display-container",TextTwoDDisplayContainer);
 customElements.define("wc-text-two-d", TextTwoD);
 customElements.define("wc-text-two-d-angle", TextTwoDAngle);
 // 3D
@@ -59,11 +61,11 @@ customElements.define("wc-text-three-d", TextThreeD);
 //! GEOMETRIES
 
 // Plane
-customElements.define("wc-plane-display-container", PlaneDisplayContainer);
+customElements.define("wc-plane-renderer", PlaneRenderer);
 customElements.define("wc-plane", Plane);
+customElements.define("wc-plane-front-back-colors", PlaneFrontBackColors);
 
 // Cube
-customElements.define("wc-cube-display-container", CubeDisplayContainer);
 customElements.define("wc-cube", Cube);
 customElements.define("wc-cube-colors", CubeColors);
 

@@ -1,4 +1,4 @@
-import styleImports from "/src/css/imports.css?inline";
+import styleImports from "/src/css/styles.css?inline";
 // import styleComponent from "/src/css/components/.css?inline";
 
 import * as THREE from "three";
@@ -19,7 +19,7 @@ class Plane extends HTMLElement {
   connectedCallback() {
     const { width, height } = this.getBoundingClientRect();
     const w = width || 400;
-    const h = height|| 400 ;
+    const h = height || 400;
 
     // Scene + Camera + Renderer
     const scene = new THREE.Scene();

@@ -1,4 +1,4 @@
-import styleImports from "/src/css/imports.css?inline";
+import styleImports from "/src/css/styles.css?inline";
 // import styleContainer from "/src/css/components/text-two-d/container.css?inline";
 
 class TextTwoDDisplayContainer extends HTMLElement {

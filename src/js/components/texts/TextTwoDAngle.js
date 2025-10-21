@@ -1,4 +1,4 @@
-import styleImports from "/src/css/imports.css?inline";
+import styleImports from "/src/css/styles.css?inline";
 
 import * as THREE from "three";
 import { setupResizeObserver } from "../../utils/resize";
@@ -16,7 +16,7 @@ class TextTwoDAngle extends HTMLElement {
   }
 
   connectedCallback() {
-    const { width, height } = this.getBoundingClientRect()
+    const { width, height } = this.getBoundingClientRect();
     const w = width || 400;
     const h = height || 400;
 
@@ -44,7 +44,7 @@ class TextTwoDAngle extends HTMLElement {
     camera.lookAt(0, 0, 0);
 
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
-    this.renderer.domElement.className = "container-border"
+    this.renderer.domElement.className = "container-border";
     this.shadowRoot.appendChild(this.renderer.domElement);
 
     // Size
@@ -66,8 +66,8 @@ class TextTwoDAngle extends HTMLElement {
     const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
     directionalLight.position.x = 1;
     directionalLight.position.y = 1;
-    directionalLight.position.z = 1
-    scene.add(ambientLight, directionalLight)
+    directionalLight.position.z = 1;
+    scene.add(ambientLight, directionalLight);
 
     // Text (Canvas)
     const canvas = document.createElement("canvas");
@@ -95,7 +95,7 @@ class TextTwoDAngle extends HTMLElement {
     const geometry = new THREE.PlaneGeometry(3, 1);
     const material = new THREE.MeshStandardMaterial({
       map: texture,
-      transparent: true
+      transparent: true,
     });
     const mesh = new THREE.Mesh(geometry, material);
 

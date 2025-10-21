@@ -1,4 +1,4 @@
-import styleImports from "/src/css/imports.css?inline";
+import styleImports from "/src/css/styles.css?inline";
 // import styleComponent from "/src/css/components/.css?inline";
 
 import * as THREE from "three";
@@ -50,7 +50,7 @@ class SphereColors extends HTMLElement {
     const geometry = new THREE.SphereGeometry(1, 32, 32);
     const colors = [];
     const color = new THREE.Color();
-    
+
     for (let i = 0; i < geometry.attributes.position.count; i++) {
       color.setHSL(i / geometry.attributes.position.count, 1.0, 0.5);
       colors.push(color.r, color.g, color.b);

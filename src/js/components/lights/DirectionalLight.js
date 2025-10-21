@@ -1,4 +1,4 @@
-import styleImports from "/src/css/imports.css?inline";
+import styleImports from "/src/css/styles.css?inline";
 // import styleComponent from "/src/css/components/.css?inline";
 
 import * as THREE from "three";
@@ -37,7 +37,9 @@ class Cube extends HTMLElement {
     const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
     directionalLight.position.set(2, 2, 3);
     // Directional Light Helper
-    const directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight)
+    const directionalLightHelper = new THREE.DirectionalLightHelper(
+      directionalLight
+    );
     // Add everytinhg together
     scene.add(ambientLight, directionalLight, directionalLightHelper);
 

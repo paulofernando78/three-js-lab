@@ -2,28 +2,28 @@ const routes = {
   "/": "wc-notes",
 
   //! TEXTS
-  "/text-2D": "wc-text-two-d-display-container",
-  "/text-3D": "wc-text-three-d-display-container",
+  "/text-2D": "wc-display-container",
+  "/text-3D": "wc-d-display-container",
 
   //! TYPE OF GEOMETRIES
   
   // Plane
-  "/plane": "wc-plane-display-container",
+  "/plane": "wc-plane-renderer",
   
   // Cube
-  "/cube": "wc-cube-display-container",
+  "/cube": "wc-cube-renderer",
   
   // Sphere
-  "/sphere": "wc-sphere-display-container",
+  "/sphere": "wc-sphere-renderer",
   
   // Cylinder
-  "/cylinder": "wc-cylinder-display-container",
+  "/cylinder": "wc-cylinder-renderer",
   
   // Hexagon
-  "/hexagon": "wc-hexagon-display-container",
+  "/hexagon": "wc-hexagon-renderer",
 
   //! PROJECTS
-  "/hexagon-text": "wc-hexagon-text",
+  "/hexagon-text": "wc-english-lesson",
 };
 
 function setActiveLink() {

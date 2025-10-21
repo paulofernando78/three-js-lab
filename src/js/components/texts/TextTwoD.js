@@ -1,4 +1,4 @@
-import styleImports from "/src/css/imports.css?inline";
+import styleImports from "/src/css/styles.css?inline";
 
 import * as THREE from "three";
 import { setupResizeObserver } from "../../utils/resize";
@@ -32,14 +32,15 @@ class TextTwoD extends HTMLElement {
     camera.lookAt(0, 0, 0);
 
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
-    this.renderer.domElement.className = "container-border"
+    this.renderer.domElement.className = "container-border";
     this.shadowRoot.appendChild(this.renderer.domElement);
 
     // Size
     this.renderer.setSize(w, h);
 
     // Resize (targetElement = #app)
-    const appContainer = this.closest("wc-text-two-d-display-container") || this;
+    const appContainer =
+      this.closest("wc-text-two-d-display-container") || this;
     this.resizeObserver = setupResizeObserver(
       this.renderer,
       camera,

@@ -1,4 +1,4 @@
-import styleImports from "/src/css/imports.css?inline";
+import styleImports from "/src/css/styles.css?inline";
 // import styleComponent from "/src/css/components/.css?inline";
 
 import * as THREE from "three";
@@ -19,19 +19,23 @@ class Hexagon extends HTMLElement {
   connectedCallback() {
     const w = window.innerWidth;
     const h = window.innerHeight;
-    
+
     // Scene + Camera + Renderer
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, w / h, 0.1, 1000);
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.shadowRoot.appendChild(this.renderer.domElement);
-    
+
     // Size
     this.renderer.setSize(w, h);
 
     // Resize (targetElement = #app)
     const appContainer = this.shadowRoot.host.parentElement;
-    this.resizeObserver = setupResizeObserver(this.renderer, camera, appContainer)
+    this.resizeObserver = setupResizeObserver(
+      this.renderer,
+      camera,
+      appContainer
+    );
 
     // Ambient Light + Directional Light
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);

@@ -1,4 +1,4 @@
-import styleImports from "/src/css/imports.css?inline";
+import styleImports from "/src/css/styles.css?inline";
 // import styleComponent from "/src/css/components/.css?inline";
 
 import * as THREE from "three";
@@ -65,8 +65,8 @@ class Text2DAngle extends HTMLElement {
     const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
     directionalLight.position.x = 1;
     directionalLight.position.y = 1;
-    directionalLight.position.z = 1
-    scene.add(ambientLight, directionalLight)
+    directionalLight.position.z = 1;
+    scene.add(ambientLight, directionalLight);
 
     // Text (Canvas)
     const canvas = document.createElement("canvas");
@@ -94,7 +94,7 @@ class Text2DAngle extends HTMLElement {
     const geometry = new THREE.PlaneGeometry(3, 1);
     const material = new THREE.MeshStandardMaterial({
       map: texture,
-      transparent: true
+      transparent: true,
     });
     const mesh = new THREE.Mesh(geometry, material);
 

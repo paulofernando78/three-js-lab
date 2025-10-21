@@ -1,4 +1,4 @@
-import styleImports from "/src/css/imports.css?inline";
+import styleImports from "/src/css/styles.css?inline";
 // import styleComponent from "/src/css/components/.css?inline";
 
 import * as THREE from "three";
@@ -61,7 +61,7 @@ class HexagonText extends HTMLElement {
     this.scene.add(hexagon);
 
     const plane = new THREE.PlaneGeometry(1, 1, 1);
-    
+
     const controls = new OrbitControls(camera, this.renderer.domElement);
     controls.enableDamping = true; // adds smooth motion
     controls.dampingFactor = 0.5; // amount of damping (inertia)
