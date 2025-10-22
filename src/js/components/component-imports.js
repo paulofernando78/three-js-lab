@@ -18,22 +18,22 @@ import TextThreeDBasic from "./texts/three-d/Basic.js";
 
 //! TYPES OF GEOMETRIES
 // Plane
-import PlaneRenderer from "./geometries/plane/Renderer.js";
-import Plane from "./geometries/plane/Basic.js";
-import PlaneFrontBackColors from "./geometries/plane/FrontBackColors.js";
+// import PlaneRenderer from "./geometries/plane/Renderer.js";
+// import Plane from "./geometries/plane/Basic.js";
+// import PlaneFrontBackColors from "./geometries/plane/FrontBackColors.js";
 // Cube
-import Cube from "./geometries/cube/Cube";
-import CubeColors from "./geometries/Cube/CubeColors";
+// import Cube from "./geometries/cube/Cube";
+// import CubeColors from "./geometries/Cube/CubeColors";
 // Cylinder
-import Sphere from "./geometries/sphere/Sphere.js";
-import SphereColors from "./geometries/sphere/SphereColor";
+// import Sphere from "./geometries/sphere/Sphere.js";
+// import SphereColors from "./geometries/sphere/SphereColor";
 // Cylinder
-import Cylinder from "./geometries/cylinder/Cylinder";
+// import Cylinder from "./geometries/cylinder/Cylinder";
 // Hexagon
-import Hexagon from "./geometries/hexagon/Hexagon";
+// import Hexagon from "./geometries/hexagon/Hexagon";
 
 //! PROJECTS
-import HexagonText from "./projects/HexagonText";
+// import HexagonText from "./projects/HexagonText";
 
 // --------------------
 
