@@ -1,31 +1,31 @@
 .card {
   border: var(--border);
   border-radius: var(--border-radius);
-  overflow: hidden;
 }
 
-.display-container {
+.renderer {
   display: flex;
   flex-direction: column;
   gap: 10px;
   scroll-behavior: smooth;
 }
 
-.display-container a {
+.renderer-container a {
   transition: 0.2 ease;
 }
 
-.display-container a:hover {
+.renderer-container a:hover {
   text-decoration: underline;
 }
 
-.display-container-title {
-  padding-left: 5px;
+.renderer-content {
   border: var(--border);
   border-radius: var(--border-radius);
+  overflow: hidden;
 }
 
-.display-container-border {
-  border-radius: 5px;
-  height: calc(100%-2px)
+.renderer-content-title {
+  padding: 3px 8px;
+  border: 0 0 1px 0;
+  background-color: var(--slate-6);
 }

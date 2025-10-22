@@ -1,9 +1,10 @@
 import styleImports from "/src/css/styles.css?inline";
+// import styleComponent from "/src/css/components/.css?inline";
 
 import * as THREE from "three";
-import { setupResizeObserver } from "../../utils/resize";
+import { setupResizeObserver } from "../../../utils/resize";
 
-class TextTwoD extends HTMLElement {
+class TextTwoDBorder extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -28,24 +29,32 @@ class TextTwoD extends HTMLElement {
     camera.position.x = 0;
     camera.position.y = 0;
     camera.position.z = 3;
-
     camera.lookAt(0, 0, 0);
 
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
-    this.renderer.domElement.className = "container-border";
     this.shadowRoot.appendChild(this.renderer.domElement);
 
     // Size
     this.renderer.setSize(w, h);
 
     // Resize (targetElement = #app)
-    const appContainer =
-      this.closest("wc-text-two-d-display-container") || this;
+    const appContainer = document.querySelector("#app");
     this.resizeObserver = setupResizeObserver(
       this.renderer,
       camera,
       appContainer
     );
+
+    // Ambient Light + Directional Light
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    ambientLight.position.x = 1;
+    ambientLight.position.y = 1;
+    ambientLight.position.z = 1;
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight.position.x = 1;
+    directionalLight.position.y = 1;
+    directionalLight.position.z = 1;
+    scene.add(ambientLight, directionalLight);
 
     // Text (Canvas)
     const canvas = document.createElement("canvas");
@@ -53,8 +62,15 @@ class TextTwoD extends HTMLElement {
     canvas.height = 256;
     const context = canvas.getContext("2d");
     context.font = "100px Arial";
-
     context.fillStyle = "white";
+    context.strokeStyle = "red";
+    context.lineWidth = 10;
+
+    // Border
+    const radius = 50;
+    context.beginPath();
+    context.roundRect(0, 0, canvas.width, canvas.height, radius);
+    context.stroke();
 
     context.textAlign = "center";
     context.textBaseline = "middle";
@@ -63,7 +79,7 @@ class TextTwoD extends HTMLElement {
     // Texture + Geometry + Material + Mesh
     const texture = new THREE.CanvasTexture(canvas);
     const geometry = new THREE.PlaneGeometry(3, 1);
-    const material = new THREE.MeshBasicMaterial({
+    const material = new THREE.MeshStandardMaterial({
       map: texture,
     });
     const mesh = new THREE.Mesh(geometry, material);
@@ -81,9 +97,9 @@ class TextTwoD extends HTMLElement {
   }
 
   disconnectedCallback() {
-    this.resizeObserver?.disconnect();
+    this.resizeObserver?.disconnect;
     this.renderer?.dispose();
   }
 }
 
-export default TextTwoD;
+export default TextTwoDBorder;

@@ -2,8 +2,8 @@ const routes = {
   "/": "wc-notes",
 
   //! TEXTS
-  "/text-2D": "wc-display-container",
-  "/text-3D": "wc-d-display-container",
+  "/text-2D": "wc-text-two-d-renderer",
+  "/text-3D": "wc-text-three-d-renderer",
 
   //! TYPE OF GEOMETRIES
   

@@ -40,6 +40,10 @@ main {
   gap: 5px;
 }
 
+.menu-btn {
+ display: none;
+}
+
 .header-title {
   font-size: 2rem;
   font-family: "Nabla", system-ui;
@@ -50,13 +54,17 @@ nav {
   overflow-y: auto; 
 }
 
+.visible {
+  display: block;
+}
+
 .nav-title {
   display: block;
   font-weight: bold;
 }
 
 a.active {
-  color: lightgray;
+  color: var(--red-4);
   font-weight: bold;
 }
 
@@ -66,8 +74,18 @@ a.active {
   overflow-y: auto;
 }
 
+@media (min-width: 700px) {
+  wc-button {
+    display: none;
+  }
+}
+
 @media (max-width: 700px) {
   main {
     grid-template-columns: 1fr;
+  }
+
+  nav {
+    display: none;
   }
 }

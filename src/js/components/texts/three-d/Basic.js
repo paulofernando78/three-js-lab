@@ -1,15 +1,13 @@
-import styleImports from "/src/css/styles.css?inline";
-// import styleComponent from "/src/css/components/.css?inline";
-
+import styleImports from "@css/styles.css?inline";
 import * as THREE from "three";
-import { setupResizeObserver } from "../../utils/resize";
+import { setupResizeObserver } from "@utils/resize";
 import {
   FontLoader,
   OrbitControls,
   TextGeometry,
 } from "three/examples/jsm/Addons.js";
 
-class TextThreeD extends HTMLElement {
+class TextThreeDBasic extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -22,8 +20,9 @@ class TextThreeD extends HTMLElement {
   }
 
   connectedCallback() {
-    const w = window.innerWidth;
-    const h = window.innerHeight;
+    const { width, height } = this.getBoundingClientRect();
+    const w = width || 400;
+    const h = height || 400;
 
     // Scene + Camera + Renderer
     const scene = new THREE.Scene();
@@ -35,7 +34,7 @@ class TextThreeD extends HTMLElement {
     this.renderer.setSize(w, h);
 
     // Resize (targetElement = #app)
-    const appContainer = this.shadowRoot.host.parentElement;
+    const appContainer = this.closest("wc-page-renderer") || this;
     this.resizeObserver = setupResizeObserver(
       this.renderer,
       camera,
@@ -72,7 +71,7 @@ class TextThreeD extends HTMLElement {
       const mesh = new THREE.Mesh(geometry, material);
       scene.add(mesh);
 
-      camera.position.z = 6;
+      camera.position.z = 3;
 
       const controls = new OrbitControls(camera, this.renderer.domElement);
       controls.update();
@@ -88,4 +87,4 @@ class TextThreeD extends HTMLElement {
   }
 }
 
-export default TextThreeD;
+export default TextThreeDBasic;

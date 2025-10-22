@@ -48,16 +48,30 @@ class PlaneFrontBackColors extends HTMLElement {
 
     // Geometry + Material (Mesh)
     const geometry = new THREE.PlaneGeometry(3, 3);
-    const material = new THREE.MeshStandardMaterial({ color: 0xeeffee });
-    const plane = new THREE.Mesh(geometry, material);
-    scene.add(plane);
+    const frontMaterial = new THREE.MeshStandardMaterial({
+      color: 0xff0000,
+      side: THREE.FrontSide,
+    });
+
+    const backMaterial = new THREE.MeshStandardMaterial({
+      color: 0x0066ff,
+      side: THREE.BackSide,
+    });
+
+    const frontPlane = new THREE.Mesh(geometry, frontMaterial);
+    const backPlane = new THREE.Mesh(geometry, backMaterial);
+    backPlane.position.z = -0.001;
+
+    const planeGroup = new THREE.Group();
+    planeGroup.add(frontPlane, backPlane);
+    scene.add(planeGroup);
 
     camera.position.z = 5;
 
     // Animation
     const animate = () => {
-      plane.rotation.x += 0.01;
-      plane.rotation.y += 0.01;
+      planeGroup.rotation.x += 0.01;
+      planeGroup.rotation.y += 0.01;
       this.renderer.render(scene, camera);
       requestAnimationFrame(animate);
     };
