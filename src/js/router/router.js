@@ -1,24 +1,27 @@
 const routes = {
   "/": "wc-notes",
 
+  // Introduction
+  "/introduction": "wc-introduction-renderer",
+
   //! TEXTS
   "/text-2D": "wc-text-two-d-renderer",
   "/text-3D": "wc-text-three-d-renderer",
 
   //! TYPE OF GEOMETRIES
-  
+
   // Plane
   "/plane": "wc-plane-renderer",
-  
+
   // Cube
   "/cube": "wc-cube-renderer",
-  
+
   // Sphere
   "/sphere": "wc-sphere-renderer",
-  
+
   // Cylinder
   "/cylinder": "wc-cylinder-renderer",
-  
+
   // Hexagon
   "/hexagon": "wc-hexagon-renderer",
 

@@ -12,6 +12,7 @@
 
 header {
   padding: var(--padding);
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -45,7 +46,7 @@ main {
 }
 
 .header-title {
-  font-size: 2rem;
+  font-size: 0.8rem;
   font-family: "Nabla", system-ui;
 }
 

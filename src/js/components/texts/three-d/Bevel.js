@@ -30,13 +30,11 @@ class TextThreeDBasic extends HTMLElement {
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.shadowRoot.appendChild(this.renderer.domElement);
 
-    //! RENDERER SIZE
     // Size
     this.renderer.setSize(w, h);
 
-    //! SETUP RESIZE OBSERVER
-    // Adjusts the renderer and camera when the container changes size
-    const appContainer = document.querySelector("#app");
+    // Resize (targetElement = #app)
+    const appContainer = this.closest("wc-page-renderer") || this;
     this.resizeObserver = setupResizeObserver(
       this.renderer,
       camera,
@@ -56,8 +54,14 @@ class TextThreeDBasic extends HTMLElement {
       // Geometry
       const geometry = new TextGeometry("Three.js", {
         font: font,
-        size: 0.1,
+        size: 0.4,
         depth: 0.1,
+        curveSegments: 6,
+        bevelEnabled: true,
+        bevelThickness: 0.08,
+        bevelSize: 0.05,
+        bevelOffset: 0,
+        bevelSegments: 2,
       });
 
       geometry.center();
@@ -67,7 +71,7 @@ class TextThreeDBasic extends HTMLElement {
       const mesh = new THREE.Mesh(geometry, material);
       scene.add(mesh);
 
-      camera.position.z = 1;
+      camera.position.z = 4;
 
       const controls = new OrbitControls(camera, this.renderer.domElement);
       controls.update();

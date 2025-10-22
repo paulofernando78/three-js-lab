@@ -4,6 +4,9 @@ import FourOhFour from "./FourOhFour";
 import Notes from "./Notes";
 import DataRenderer from "./DataRenderer.js";
 
+// Introduction
+import IntroductionRenderer from "./introduction/Renderer.js";
+
 //! TEXTS
 // 2D
 import TextTwoDRenderer from "./texts/two-d/Renderer.js";
@@ -33,6 +36,9 @@ import Hexagon from "./geometries/hexagon/Hexagon";
 import HexagonText from "./projects/HexagonText";
 
 // --------------------
+
+// Introduction
+customElements.define("wc-introduction-renderer", IntroductionRenderer);
 
 //! GENERAL
 customElements.define("wc-button", Button);

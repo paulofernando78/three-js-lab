@@ -3,6 +3,7 @@ import styleImports from "/src/css/styles.css?inline";
 
 import * as THREE from "three";
 import { setupResizeObserver } from "../../../utils/resize";
+import { OrbitControls } from "three/examples/jsm/Addons.js";
 
 class TextTwoDBorder extends HTMLElement {
   constructor() {
@@ -83,8 +84,11 @@ class TextTwoDBorder extends HTMLElement {
       map: texture,
     });
     const mesh = new THREE.Mesh(geometry, material);
-
     scene.add(mesh);
+
+    // Orbit Controls
+    const controls = new OrbitControls(camera, this.renderer.domElement);
+    controls.update();
 
     // Animation
     const animate = () => {
